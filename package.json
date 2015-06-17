@@ -1,0 +1,14 @@
+{
+  "name": "PollFly",
+  "version": "0.1.0",
+  "description": "Create Polls on the Fly!",
+  "repository": "https://github.com/sharkySharks/PollFly.git",
+  "dependencies": {
+    "body-parser": "^1.13.1",
+    "express": "^4.12.4",
+    "jquery": "^2.1.4",
+    "mongodb": "^2.0.33",
+    "mongoose": "^4.0.5"
+  },
+  "devDependencies": {}
+}
