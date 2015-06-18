@@ -3,7 +3,7 @@ var express    = require('express');
 var mongoose   = require('mongoose');
 var app        = express();
 
-//mongoose.connect()
+mongoose.connect('mongodb://localhost/PollFly'); // connects to db called PollFly
 
 app.use(express.static(__dirname + '/Client'));
 app.use(bodyParser.json());
