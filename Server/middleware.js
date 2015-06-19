@@ -6,4 +6,4 @@ module.exports = function(app, express){
   app.use(bodyParser.json());
   app.use('/polls', polls);
   require('./polls/poll-routes.js')(polls);
-}
+};
