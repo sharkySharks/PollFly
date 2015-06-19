@@ -1,4 +1,4 @@
-var Polls = require('../models.Poll');
+var Poll = require('./Poll');
 
 function saveNewPoll (req, res){
   // Example data to test db
@@ -9,13 +9,12 @@ function saveNewPoll (req, res){
               { text: 'If I am lucky', votes: []}]
   };
 
-  // need to make a function that returns a promise,
-  // then wrap around this function to save to db
-    return Poll.fromRequest(example);
-
-  .then(function(poll){
-    poll.save();
-  })
+  var poll = new Poll({
+    question    : example.question,
+    choices     : example.choices
+  }).save(function(err, poll){
+    res.send(poll);
+  });
 
 }
 

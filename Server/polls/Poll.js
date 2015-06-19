@@ -14,12 +14,13 @@ var pollSchema    = new Schema({
 
 var Poll = mongoose.model('Poll', pollSchema);
 
-Poll.fromRequest = function(req){
-  return new Poll({
-    question    : req.question,
-    choices     : req.choices
-  })
-}
+// Poll.fromRequest = function(req){
+//   console.log('inside Poll.fromRequest: req', req);
+//   return new Poll({
+//     question    : req.question,
+//     choices     : req.choices
+//   })
+// }
 
 module.exports = Poll;
 
