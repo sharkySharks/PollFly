@@ -1,6 +1,6 @@
 var pollFunctions = require('./poll-functions');
 
 module.exports = function (polls){
-  polls.post('/', pollFunctions.saveNewPoll);
+  polls.post('/newPoll', pollFunctions.saveNewPoll);
 
 };

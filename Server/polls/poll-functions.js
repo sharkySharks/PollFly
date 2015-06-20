@@ -1,18 +1,10 @@
 var Poll = require('./Poll');
 
 function saveNewPoll (req, res){
-  // Example data to test db
-  var example = {
-    question: 'Is this going to go into the db?',
-    choices: [{ text: 'Perhaps', votes: [] }, 
-              { text: 'Unlikely', votes: []},
-              { text: 'If I am lucky', votes: []}]
-  };
+  var newPoll = req.body;
 
-  var poll = new Poll({
-    question    : example.question,
-    choices     : example.choices
-  }).save(function(err, poll){
+  var poll = new Poll(newPoll).save(function(err, poll){
+    console.log('New Poll Saved: ', newPoll);
     res.send(poll);
   });
 

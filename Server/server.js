@@ -5,7 +5,7 @@ var app        = express();
 
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/PollFly'); // connects to db called PollFly
 
-app.use('/', express.static('Client'));
+app.use(express.static(__dirname + '/../Client'));
 app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
