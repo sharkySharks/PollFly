@@ -14,8 +14,35 @@ angular.module('PollFly.createPolls', ['ngRoute'])
     };
 
     $scope.createNewPoll = function(){
+      var poll = $scope.poll;
+      if(poll.question.length > 0){
+        var count = 0;
 
-      NewPolls.createNew($scope.poll);
+        for(var i = 0, len = poll.choices.length; i < len; i++){
+          if(poll.choices[i].text.length > 0){
+            count++
+          }
+        }
+
+        if(count > 1){ 
+          NewPolls.createNew(poll)
+          .then(function(savedPoll){
+            $scope.poll = {
+              question: '',
+              choices: [{text: ''}, {text: ''}, {text: ''}]
+            };
+            // when routing is figured out, alert the user of
+            // where they can find their new poll w/ a link
+            console.log(savedPoll) // mongo id returned
+          })
+        } else {
+          alert('Please enter at least two choices.')
+        }
+
+      } else {
+        alert('Please enter a question.')
+      }
+
 
     };
 
