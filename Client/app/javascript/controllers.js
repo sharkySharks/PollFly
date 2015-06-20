@@ -2,53 +2,71 @@
 
 angular.module('PollFly.createPolls', ['ngRoute'])
 
-.controller('NewPollController', function($scope, NewPolls){
+.controller('NewPollController', function($scope, $routeParams, $location, NewPolls){
 
-    $scope.poll = {
-      question: '',
-      choices: [{text: ''}, {text: ''}, {text: ''}]
-    };
+  $scope.poll = {
+    question: '',
+    choices: [{text: ''}, {text: ''}, {text: ''}]
+  };
 
-    $scope.addChoice = function(){
-      $scope.poll.choices.push({text: ''})
-    };
+  $scope.addChoice = function(){
+    $scope.poll.choices.push({text: ''})
+  };
 
-    $scope.createNewPoll = function(){
-      var poll = $scope.poll;
-      if(poll.question.length > 0){
-        var count = 0;
+  $scope.pathAlert = [];
 
-        for(var i = 0, len = poll.choices.length; i < len; i++){
-          if(poll.choices[i].text.length > 0){
-            count++
-          }
+  $scope.createNewPoll = function(){
+    var poll = $scope.poll;
+    if(poll.question.length > 0){
+      var count = 0;
+
+      for(var i = 0, len = poll.choices.length; i < len; i++){
+        if(poll.choices[i].text.length > 0){
+          count++
         }
-
-        if(count > 1){ 
-          NewPolls.createNew(poll)
-          .then(function(savedPoll){
-            $scope.poll = {
-              question: '',
-              choices: [{text: ''}, {text: ''}, {text: ''}]
-            };
-            // when routing is figured out, alert the user of
-            // where they can find their new poll w/ a link
-            console.log(savedPoll) // mongo id returned
-          })
-        } else {
-          alert('Please enter at least two choices.')
-        }
-
-      } else {
-        alert('Please enter a question.')
       }
 
+      if(count > 1){ 
+        NewPolls.createNew(poll)
+        .then(function(savedPoll){
+          $scope.poll = {
+            question: '',
+            choices: [{text: ''}, {text: ''}, {text: ''}]
+          };
+          
+          var loc = $location.absUrl();
+          var path = $location.path();
 
-    };
+          $scope.pathAlert.push(loc.slice(0,loc.indexOf(path)) + '/polls/' + savedPoll._id);
 
-  // contains functions that directly manipulate the view
-  // calls function in services/factories (model)
-    // get access to the factories by including the name in the 
-    // parameters of this function, see docs
+          console.log('savedPoll:', savedPoll, 'loc', loc, 'path:', path); 
+
+        })
+      } else {
+        alert('Please enter at least two choices.')
+      }
+
+    } else {
+      alert('Please enter a question.')
+    }
+  };
+});
+
+angular.module('PollFly.votePoll', ['ngRoute'])
+
+.controller('PollForVote', function($scope, $routeParams, VotePoll){
+
+  $scope.poll = VotePoll.get({pollId: $routeParams.pollId}, function(){
+    console.log('SCOPE.POLL:', $scope.poll);
+  });
+
+  $scope.vote = function(){};
 
 });
+
+
+
+
+
+
+

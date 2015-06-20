@@ -3,6 +3,7 @@
 var PollFly = angular.module('PollFly', [
   'ngRoute',
   'PollFly.createPolls',
+  'PollFly.votePoll',
   'PollFly.services'
 ])
 .config(['$routeProvider', function($routeProvider){
@@ -14,10 +15,10 @@ var PollFly = angular.module('PollFly', [
       templateUrl: 'app/views/createPoll.html',
       controller: 'NewPollController'
     })
-    // .when('/polls/:pollId', {
-    //   templateUrl: 'app/views/votePoll.html',
-    //   controller: ''
-    // })
+    .when('/polls/:pollId', {
+      templateUrl: 'app/views/votePoll.html',
+      controller: 'PollForVote'
+    })
     .otherwise({
       redirectTo: '/'
     });

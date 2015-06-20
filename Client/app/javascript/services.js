@@ -1,5 +1,5 @@
 
-angular.module('PollFly.services', [])
+angular.module('PollFly.services', ['ngResource'])
 
 .factory('NewPolls', function($http){
 
@@ -16,8 +16,19 @@ angular.module('PollFly.services', [])
     });
   };
 
-
   return {
     createNew: createNew
   }
-});
+})
+
+.factory('VotePoll', function($resource){
+
+  return $resource('polls/:pollId', {}, {
+    query: {
+      method: 'GET',
+      params: { pollId: 'polls'}, 
+      isArray: true
+    }
+  })
+
+})
