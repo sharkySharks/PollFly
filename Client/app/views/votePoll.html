@@ -1,12 +1,11 @@
 <div ng-controller="PollForVote">
-  <h1>Your Poll: {{poll.question}}</h1>
-  
   <div class="well well-lg">
-    <strong>Question</strong><br>
+    <strong>Poll Question:&nbsp;</strong>
     {{poll.question}}
   </div>
-
-  <div>
+  
+  <!-- Layout for polls allowing users one voting choice -->
+  <div ng-hide="poll.multiple">
     <p class="lead">Please select one of the following options.</p>
     <form role="form" ng-submit="vote()">
       <div ng-repeat="choice in poll.choices" class="radio">
@@ -22,7 +21,8 @@
     </form>
   </div>
 
+  <!-- Layout for polls allowing users to vote on multiple choices -->
+  <div ng-show="poll.multiple">
 
-
-
+  </div>
 </div>

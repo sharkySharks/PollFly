@@ -2,7 +2,7 @@
 
 angular.module('PollFly.createPolls', ['ngRoute'])
 
-.controller('NewPollController', function($scope, $routeParams, $location, NewPolls){
+.controller('NewPollController', function($scope, $routeParams, $location, Polls){
 
   $scope.poll = {
     question: '',
@@ -29,12 +29,11 @@ angular.module('PollFly.createPolls', ['ngRoute'])
       for(var i = 0, len = poll.choices.length; i < len; i++){
         if(poll.choices[i].text.length > 0){
           count++
-
         }
       }
 
       if(count > 1){ 
-        NewPolls.createNew(poll)
+        Polls.createNew(poll)
         .then(function(savedPoll){
           $scope.poll = {
             question: '',
@@ -61,24 +60,3 @@ angular.module('PollFly.createPolls', ['ngRoute'])
     }
   };
 });
-
-angular.module('PollFly.votePoll', ['ngRoute'])
-
-.controller('PollForVote', function($scope, $routeParams, VotePoll){
-
-  $scope.poll = VotePoll.get({pollId: $routeParams.pollId}, function(){
-    console.log('SCOPE.POLL:', $scope.poll);
-  });
-
-
-
-  $scope.vote = function(){};
-
-});
-
-
-
-
-
-
-

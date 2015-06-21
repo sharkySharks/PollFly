@@ -1,7 +1,7 @@
 
 angular.module('PollFly.services', ['ngResource'])
 
-.factory('NewPolls', function($http){
+.factory('Polls', function($http){
 
   var createNew = function(pollData){
     console.log('pollData', pollData);
@@ -16,12 +16,22 @@ angular.module('PollFly.services', ['ngResource'])
     });
   };
 
+  var pollVote = function(voteData){
+
+    return $http({
+      method: 'PUT',
+      url: 'polls/:pollId/vote',
+      data: voteData
+    })
+  };
+
   return {
-    createNew: createNew
+    createNew: createNew,
+    pollVote: pollVote
   }
 })
 
-.factory('VotePoll', function($resource){
+.factory('PollData', function($resource){
 
   return $resource('polls/:pollId', {}, {
     query: {
@@ -30,5 +40,4 @@ angular.module('PollFly.services', ['ngResource'])
       isArray: true
     }
   })
-
-})
+});

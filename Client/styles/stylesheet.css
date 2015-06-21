@@ -25,7 +25,6 @@ form button {
 
 form input {
   border-radius: 3px;
-  height: 1.8em;
   padding: 0 0.5em;
 }
 
@@ -130,6 +129,10 @@ form input[type='time'] {
 
 .pollAlert {
   font-size: 1.5em;
+}
+
+.well {
+  font-size: 1.2em;
 }
 
 ::-webkit-input-placeholder {

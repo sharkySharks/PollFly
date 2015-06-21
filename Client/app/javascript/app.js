@@ -19,6 +19,10 @@ var PollFly = angular.module('PollFly', [
       templateUrl: 'app/views/votePoll.html',
       controller: 'PollForVote'
     })
+    .when('/polls/:pollId/vote', {
+      templateUrl: 'app/views/votePoll.html',
+      controller: 'PollForVote'
+    })
     .otherwise({
       redirectTo: '/'
     });
