@@ -17,17 +17,27 @@ angular.module('PollFly.services', ['ngResource'])
   };
 
   var pollVote = function(voteData){
-
+    console.log('voteData', voteData);
     return $http({
-      method: 'PUT',
-      url: 'polls/:pollId/vote',
+      method: 'POST',
+      url: 'polls/vote',
       data: voteData
-    })
+    }).then(function(res){
+      return res.data;
+    });
   };
+
+  var getIPAddress = function(){
+    return $http({
+      method: 'GET',
+      url: 'https://api.ipify.org'
+    })
+  }
 
   return {
     createNew: createNew,
-    pollVote: pollVote
+    pollVote: pollVote,
+    getIPAddress:  getIPAddress
   }
 })
 

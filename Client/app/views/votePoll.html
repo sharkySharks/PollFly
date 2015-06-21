@@ -1,5 +1,5 @@
 <div ng-controller="PollForVote">
-  <div class="well well-lg">
+  <div class="well well-lg" ng-init="show()">
     <strong>Poll Question:&nbsp;</strong>
     {{poll.question}}
   </div>
@@ -10,7 +10,7 @@
     <form role="form" ng-submit="vote()">
       <div ng-repeat="choice in poll.choices" class="radio">
         <label>
-          <input type="radio" name="choice" ng-model="poll.userVote" value="{{choice._id}}" />
+          <input type="radio" name="choice" ng-model="choiceVotes[choice._id]" value="true" />
             {{choice.text}}
         </label>
       </div>
@@ -23,6 +23,18 @@
 
   <!-- Layout for polls allowing users to vote on multiple choices -->
   <div ng-show="poll.multiple">
-
+    <p class="lead">Please select all that apply.</p>
+    <form role="form" ng-submit="vote()">
+      <div ng-repeat="choice in poll.choices" class="radio">
+        <label>
+          <input type="checkbox" name="choice" ng-click="addRemoveVote(choice._id)" value="{{choice._id}}" />
+            {{choice.text}}
+        </label>
+      </div>
+      <p><hr></p>
+      <div class="col-xs-6">
+        <button class="btn btn-primary pull-right" type="submit">Vote &raquo;</button>
+      </div>
+    </form>
   </div>
 </div>

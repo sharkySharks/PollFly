@@ -22,15 +22,20 @@ function getPoll (req, res){
 
 function vote (req, res){
   var voteData = req.body;
-  
-  for(var i = 0; i < voteData.votes.length; i++){
-    Polls.Choice.findById(voteData.votes[i]).then(function(choice){
-      choice.votes.push(voteData.IP);
-      choice.save();
+
+  Polls.Poll.findById(voteData.pollId).then(function(poll){
+    voteData.votes.map(function(vote){
+      var choice = poll.choices.id(vote);
+      choice.votes.push({ip: voteData.IP});
     })
-  }
-   
-  res.send('votes recorded for poll_id:', voteData.pollId);
+
+    poll.save().then(function(poll){
+      res.send(poll);
+    });
+
+    console.log('POLL AFTER VOTES SAVED:', poll.choices)
+
+  });
 }
 
 module.exports = {

@@ -6,25 +6,66 @@ angular.module('PollFly.votePoll', ['ngRoute'])
 
   $scope.poll = PollData.get({pollId: $routeParams.pollId});
 
-  $scope.getIP = function(){
-    $.getJSON("http://jsonip.com?callback=?", function (data) {
-        alert("Your ip: " + data.ip);
-    });
+  $scope.userVoted = false;
+
+  $scope.choiceVotes = {};
+
+  $scope.addRemoveVote = function(choice){
+    if(!$scope.choiceVotes.hasOwnProperty(choice)){
+      $scope.choiceVotes[choice] = true;
+    } else {
+      $scope.choiceVotes[choice] = !$scope.choiceVotes[choice]; 
+    }
   };
 
-  $scope.voteData = {
-    pollId: $scope.pollId,
-    votes: [],
-    IP: 'testip'
-  }
+  $scope.setStorage = function(voteData){
+    if(localStorage.getItem('PollFly') === null){
+      var storage = {};
+      storage[voteData.IP] = {};
+      storage[voteData.IP][voteData.pollId] = true;
+      localStorage.setItem('PollFly', JSON.stringify(storage));
+    } else {
+      var currentStorage = JSON.parse(localStorage.getItem('PollFly'));
+      
+      if(!currentStorage.hasOwnProperty(voteData.IP)){
+        currentStorage[voteData.IP][voteData.pollId] = true;
+      } else {
+        console.log('USER HAS ALREADY VOTED FOR THIS POLL!');
+      }
+      localStorage.setItem('PollFly', JSON.stringify(currentStorage));
+    }
+  };
 
   $scope.vote = function(){
-    localStorage.setItem(); // set ip or a flag to indicate voting happened
-    
-    console.log('voteData:', voteData);
 
-    Polls.pollVote(voteData);
-    console.log('$scope.poll:', $scope.poll);
+    var voteData = {
+      pollId: $scope.poll._id,
+      votes: [], // <-- choice._id's
+      IP: 'testip'
+    };
+
+    Polls.getIPAddress().then(function(ip){
+      voteData.IP = ip.data;
+
+      $scope.setStorage(voteData);
+
+      for (var choice in $scope.choiceVotes){
+        if($scope.choiceVotes[choice]){
+          voteData.votes.push(choice);
+        }
+      }
+
+    }).then(function(){
+      Polls.pollVote(voteData).then(function(poll){
+        $scope.poll = poll;
+        console.log('POLL AFTER VOTE SAVE:', $scope.poll);
+      })
+    }).then(function(){
+      $scope.didUserVote();
+    })
   };
 
+  $scope.didUserVote = function(){
+    localStorage.getItem('PollFly')
+  };
 });
