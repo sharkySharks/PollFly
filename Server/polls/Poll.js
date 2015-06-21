@@ -9,52 +9,10 @@ var choiceSchema  = new Schema({
 });
 var pollSchema    = new Schema({
   question  : { type: String, required: true },
-  choices   : [choiceSchema]
+  choices   : [choiceSchema],
+  multiple  : Boolean
 });
 
 var Poll = mongoose.model('Poll', pollSchema);
 
-// Poll.fromRequest = function(req){
-//   console.log('inside Poll.fromRequest: req', req);
-//   return new Poll({
-//     question    : req.question,
-//     choices     : req.choices
-//   })
-// }
-
 module.exports = Poll;
-
-/*
-should look like:
-
-{
-  question  : String,
-  choices   : [
-    {
-      text  : String,
-      vote  : [
-        {
-          ip: String 
-        }
-      ]
-    },
-    {
-      text  : String,
-      vote  : [
-        {
-          ip: String 
-        }
-      ]
-    },
-    {
-      text  : String,
-      vote  : [
-        {
-          ip: String 
-        }
-      ]
-    }
-  ]
-}
-
-*/

@@ -14,15 +14,20 @@
         <input type="text" ng-model="choice.text" class="form-control" placeholder="Enter poll choice {{$index+1}} here">
         <br>
       </div>
+      <button type="button" class="btn btn-default btn-block" ng-click="addChoice()"><span class="glyphicon glyphicon-plus"></span> Add More Choices </button>
     </div>
-    <div>
-      <div class="col-xs-12">
-        <button type="button" class="btn btn-primary" ng-click="addChoice()"><span class="glyphicon glyphicon-plus"></span> Add More Choices </button>
-        <input type="submit" class="btn btn-primary" value="Save" />
-      </div>
+    <div class="form-group">
+      <input type="checkbox" ng-model="poll.multiple">
+      <label><span class="multiple"> Allow user to vote for multiple poll choices at a time</span></label>
+    </div>
+    <div class="col-xs-12">
+      <button type="submit" class="btn btn-primary btn-lg">Save</button>
     </div>
     <p><hr></p><br><br>
-    <alert ng-repeat="path in pathAlert">
-      Find your poll here: <a href="{{path}}">{{path}}</a><br>
-    </alert>
+    <div ng-show="voted">
+      <label class="pollAlert"> Awesome! Access and share your poll with this link: </label>
+      <alert class="alert" ng-repeat="path in pathAlert">
+        <a href="{{path}}">{{path}}</a><br>
+      </alert>
+    </div>
 </div>

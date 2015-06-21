@@ -1,6 +1,26 @@
 <div ng-controller="PollForVote">
-    <h1>Your Poll: {{poll}}</h1>
-    
+  <h1>Your Poll: {{poll.question}}</h1>
+  
+  <div class="well well-lg">
+    <strong>Question</strong><br>
+    {{poll.question}}
+  </div>
+
+  <div>
+    <p class="lead">Please select one of the following options.</p>
+    <form role="form" ng-submit="vote()">
+      <div ng-repeat="choice in poll.choices" class="radio">
+        <label>
+          <input type="radio" name="choice" ng-model="poll.userVote" value="{{choice._id}}" />
+            {{choice.text}}
+        </label>
+      </div>
+      <p><hr></p>
+      <div class="col-xs-6">
+        <button class="btn btn-primary pull-right" type="submit">Vote &raquo;</button>
+      </div>
+    </form>
+  </div>
 
 
 
