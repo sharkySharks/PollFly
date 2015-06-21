@@ -28,18 +28,20 @@ function vote (req, res){
       var choice = poll.choices.id(vote);
       choice.votes.push({ip: voteData.IP});
     })
-
     poll.save().then(function(poll){
       res.send(poll);
     });
-
-    console.log('POLL AFTER VOTES SAVED:', poll.choices)
-
   });
+}
+
+function getResult (req, res){
+  console.log('got into the results function!!');
+  
 }
 
 module.exports = {
   saveNewPoll: saveNewPoll,
   getPoll: getPoll,
-  vote: vote
+  vote: vote,
+  getResult: getResult
 };

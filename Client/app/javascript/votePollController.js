@@ -2,11 +2,25 @@
 
 angular.module('PollFly.votePoll', ['ngRoute'])
 
-.controller('PollForVote', function($scope, $routeParams, PollData, Polls){
+.controller('PollForVote', function($scope, $routeParams, $location, PollData, Polls, PollResults){
 
   $scope.poll = PollData.get({pollId: $routeParams.pollId});
 
   $scope.userVoted = false;
+
+  $scope.didUserVote = function(){
+    var storage = JSON.parse(localStorage.getItem('PollFly'));
+
+    Polls.getIPAddress().then(function(ip){
+      var IP = ip.data;
+
+      if(storage.hasOwnProperty(IP)){
+        if(storage[IP].hasOwnProperty($scope.poll._id)){
+          $scope.userVoted = true;
+        }
+      }
+    });
+  };
 
   $scope.choiceVotes = {};
 
@@ -27,11 +41,11 @@ angular.module('PollFly.votePoll', ['ngRoute'])
     } else {
       var currentStorage = JSON.parse(localStorage.getItem('PollFly'));
       
-      if(!currentStorage.hasOwnProperty(voteData.IP)){
+      // if(!currentStorage.hasOwnProperty(voteData.IP)){
         currentStorage[voteData.IP][voteData.pollId] = true;
-      } else {
-        console.log('USER HAS ALREADY VOTED FOR THIS POLL!');
-      }
+      // } else {
+      //   console.log('USER HAS ALREADY VOTED FOR THIS POLL!');
+      // }
       localStorage.setItem('PollFly', JSON.stringify(currentStorage));
     }
   };
@@ -65,7 +79,9 @@ angular.module('PollFly.votePoll', ['ngRoute'])
     })
   };
 
-  $scope.didUserVote = function(){
-    localStorage.getItem('PollFly')
+  $scope.results = function(){
+    var loc = $location.path + '/result';
+    //$location.url(loc);
+    console.log('loc:', $location.path);
   };
 });

@@ -50,4 +50,15 @@ angular.module('PollFly.services', ['ngResource'])
       isArray: true
     }
   })
+})
+
+.factory('PollResults', function($resource){
+  console.log('HIII:', $resource);
+  return $resource('polls/:pollId/result', {}, {
+    query: {
+      method: 'GET',
+      params: { pollId: 'polls'}, 
+      isArray: true
+    }
+  })
 });
