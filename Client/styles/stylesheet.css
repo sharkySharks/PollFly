@@ -63,6 +63,7 @@ h3 {
   padding: 0 1em;
   max-width: 60%;
   margin: 0 auto;
+  margin-bottom: 100px;
 }
 
 #map {
@@ -96,7 +97,7 @@ h3 {
   color: #404040;
   font-size: 1.5em;
   border-radius: 5px;
-  height:50px;
+  height:40px;
   font-weight:bold;
   font-size: 1.2em;
 }
@@ -111,7 +112,8 @@ h3 {
 
 .chartBorder {
   background-color: rgba(0,0,0,.8);
-  padding: 30px;
+  padding: 10px;
+  padding-left: 20px;
   border-radius: 5px;
   border: #000 1px solid;
 }
