@@ -6,4 +6,7 @@ angular.module('PollFly.viewPollResults', ['ngRoute'])
 
   $scope.poll = PollResults.get({pollId: $routeParams.pollId});
 
+  $scope.width = 600;
+  $scope.height = 400;
+
 });

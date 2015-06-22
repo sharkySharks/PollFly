@@ -1,0 +1,14 @@
+<div ng-controller="PollResults">
+  <div>
+    <h1> Results </h1>
+    <h2 style="text-align:center">{{poll.question}} </h2>
+  </div>
+  <div class="chartBorder">
+    <div class="chart" ng-repeat="bar in poll.choices">
+      <label>Hey</label>
+      <div style="width: {{bar.votes.length*25/width*100}}%;">
+        {{bar.votes.length}}
+      </div><br><br>
+    </div>
+  </div>
+</div>

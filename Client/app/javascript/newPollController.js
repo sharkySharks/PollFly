@@ -33,8 +33,7 @@ angular.module('PollFly.createPolls', ['ngRoute'])
       }
 
       if(count > 1){ 
-        Polls.createNew(poll)
-        .then(function(savedPoll){
+        Polls.createNew(poll).then(function(savedPoll){
           $scope.poll = {
             question: '',
             choices: [{text: ''}, {text: ''}, {text: ''}],
@@ -47,16 +46,12 @@ angular.module('PollFly.createPolls', ['ngRoute'])
           var path = $location.path();
 
           $scope.pathAlert.push(loc.slice(0,loc.indexOf(path)) + '/polls/' + savedPoll._id);
-
-          console.log('savedPoll:', savedPoll); 
-
         })
       } else {
-        alert('Please enter at least two choices.')
+        alert('It is more fun when you have at least two choices!');
       }
-
     } else {
-      alert('Please enter a question.')
+      alert('Did you forget your question?');
     }
   };
 });

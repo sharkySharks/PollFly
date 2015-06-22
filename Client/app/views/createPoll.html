@@ -1,8 +1,5 @@
-<div>
-    <h1>Create A New Poll</h1>
-</div>
-
 <div ng-controller="NewPollController">  
+  <h1>Create A New Poll</h1>
   <form role="form" ng-submit="createNewPoll()">
     <div class="form-group">
       <label for="pollQuestion">Question</label>
@@ -17,17 +14,17 @@
       <button type="button" class="btn btn-default btn-block" ng-click="addChoice()"><span class="glyphicon glyphicon-plus"></span> Add More Choices </button>
     </div>
     <div class="form-group">
-      <input type="checkbox" ng-model="poll.multiple">
-      <label><span class="multiple"> Allow user to vote for multiple poll choices at a time</span></label>
+      <input type="checkbox" class="box" ng-model="poll.multiple">
+      <label><span class="multiple"> Allow voting on multiple choices</span></label>
     </div>
     <div class="col-xs-12">
       <button type="submit" class="btn btn-primary btn-lg">Save</button>
     </div>
     <p><hr></p><br><br>
-    <div ng-show="voted">
-      <label class="pollAlert"> Awesome! Access and share your poll with this link: </label>
+    <div class="link-list" ng-show="voted">
+      <label class="pollAlert"> Awesome! Access and share your poll below: </label>
       <alert class="alert" ng-repeat="path in pathAlert">
-        <a href="{{path}}">{{path}}</a><br>
+        <a class="path-link" href="{{path}}">{{path}}</a><br>
       </alert>
     </div>
 </div>

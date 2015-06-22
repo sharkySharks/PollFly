@@ -16,19 +16,21 @@
   <link rel="stylesheet" type="text/css" href="/styles/stylesheet.css">
 </head>
 <body ng-cloak>
-  <nav class="navbar navbar-default">
+  <nav class="navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#/">PollFly</a>
+        <a class="navbar-brand" href="#/"><span style="color:#777">Poll</span><span style="color: rgb(248, 6, 94);">Fly</span></a>
       </div>
+      <div class="tagline">
+        ...Polls On The Fly
+      </div>  
       <div>
         <ul class="nav navbar-nav">
-          <li><a href="#/create">Create New Poll</a></li>
+          <li><a href="#/create">Create Poll</a></li>
         </ul>
       </div>
     </div>
   </nav>
-  
 
   <div id="main" ng-view></div>
 

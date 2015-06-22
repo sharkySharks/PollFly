@@ -34,14 +34,8 @@ function vote (req, res){
   });
 }
 
-function getResult (req, res){
-  console.log('got into the results function!!');
-  
-}
-
 module.exports = {
   saveNewPoll: saveNewPoll,
   getPoll: getPoll,
-  vote: vote,
-  getResult: getResult
+  vote: vote
 };

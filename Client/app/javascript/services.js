@@ -4,8 +4,6 @@ angular.module('PollFly.services', ['ngResource'])
 .factory('Polls', function($http){
 
   var createNew = function(pollData){
-    console.log('pollData', pollData);
-
     return $http({
       method: 'POST',
       url: 'polls/newPoll',
@@ -17,7 +15,6 @@ angular.module('PollFly.services', ['ngResource'])
   };
 
   var pollVote = function(voteData){
-    console.log('voteData', voteData);
     return $http({
       method: 'POST',
       url: 'polls/vote',
@@ -42,7 +39,6 @@ angular.module('PollFly.services', ['ngResource'])
 })
 
 .factory('PollData', function($resource){
-
   return $resource('polls/:pollId', {}, {
     query: {
       method: 'GET',
@@ -53,7 +49,6 @@ angular.module('PollFly.services', ['ngResource'])
 })
 
 .factory('PollResults', function($resource){
-  console.log('HIII:', $resource);
   return $resource('polls/:pollId/result', {}, {
     query: {
       method: 'GET',

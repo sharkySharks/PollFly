@@ -8,18 +8,19 @@ angular.module('PollFly.votePoll', ['ngRoute'])
 
   $scope.userVoted = false;
 
+  $scope.pollId = $location.absUrl().split('/').slice(-1).join('');
+
+  $scope.resultLink = $location.absUrl() + '/result';
+
   $scope.didUserVote = function(){
     var storage = JSON.parse(localStorage.getItem('PollFly'));
+    var pollId  = $location.absUrl();
 
-    Polls.getIPAddress().then(function(ip){
-      var IP = ip.data;
-
-      if(storage.hasOwnProperty(IP)){
-        if(storage[IP].hasOwnProperty($scope.poll._id)){
-          $scope.userVoted = true;
-        }
-      }
-    });
+    for(var prop in storage){
+      if(storage[prop].hasOwnProperty($scope.pollId)){
+        $scope.userVoted = true;
+      }  
+    }
   };
 
   $scope.choiceVotes = {};
@@ -41,47 +42,42 @@ angular.module('PollFly.votePoll', ['ngRoute'])
     } else {
       var currentStorage = JSON.parse(localStorage.getItem('PollFly'));
       
-      // if(!currentStorage.hasOwnProperty(voteData.IP)){
+      if(!currentStorage.hasOwnProperty(voteData.IP)){
+        currentStorage[voteData.IP] = {};
         currentStorage[voteData.IP][voteData.pollId] = true;
-      // } else {
-      //   console.log('USER HAS ALREADY VOTED FOR THIS POLL!');
-      // }
+      } else {
+        currentStorage[voteData.IP][voteData.pollId] = true;
+      }
       localStorage.setItem('PollFly', JSON.stringify(currentStorage));
     }
   };
 
   $scope.vote = function(){
-
     var voteData = {
       pollId: $scope.poll._id,
       votes: [], // <-- choice._id's
-      IP: 'testip'
+      IP: ''
     };
 
-    Polls.getIPAddress().then(function(ip){
-      voteData.IP = ip.data;
-
-      $scope.setStorage(voteData);
-
-      for (var choice in $scope.choiceVotes){
-        if($scope.choiceVotes[choice]){
-          voteData.votes.push(choice);
-        }
+    for (var choice in $scope.choiceVotes){
+      if($scope.choiceVotes[choice]){
+        voteData.votes.push(choice);
       }
+    }
 
-    }).then(function(){
-      Polls.pollVote(voteData).then(function(poll){
-        $scope.poll = poll;
-        console.log('POLL AFTER VOTE SAVE:', $scope.poll);
-      })
-    }).then(function(){
-      $scope.didUserVote();
-    })
-  };
-
-  $scope.results = function(){
-    var loc = $location.path + '/result';
-    //$location.url(loc);
-    console.log('loc:', $location.path);
+    if (voteData.votes.length){
+      Polls.getIPAddress().then(function(ip){
+        voteData.IP = ip.data;
+        $scope.setStorage(voteData);
+      }).then(function(){
+        Polls.pollVote(voteData).then(function(poll){
+          $scope.poll = poll;
+        })
+      }).then(function(){
+        $scope.didUserVote();
+      });
+    } else {
+      alert('Select one option before trying to submit your vote.');
+    }
   };
 });

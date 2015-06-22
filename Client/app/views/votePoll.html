@@ -1,48 +1,50 @@
 <div ng-controller="PollForVote" ng-init="didUserVote()" ng-cloak>
   <div class="well well-lg">
-    <strong>Poll Question:&nbsp;</strong>
+    <span style="color: white">Poll Question:</span>&nbsp;
     {{poll.question}}
   </div>
-  <div ng-hide="userVoted"> 
+  <div class="container-vote" ng-hide="userVoted"> 
     <!-- Layout for polls allowing users one voting choice -->
-    <div ng-hide="poll.multiple">
+    <div class="vote-box" ng-hide="poll.multiple">
       <p class="lead">Please select one of the following options.</p>
       <form role="form" ng-submit="vote()">
         <div ng-repeat="choice in poll.choices" class="radio">
           <label>
             <input type="radio" name="choice" ng-model="choiceVotes[choice._id]" value="true" />
-              {{choice.text}}
+              &nbsp;&nbsp;{{choice.text}}
           </label>
         </div>
+        <br>
         <p><hr></p>
-        <div class="col-xs-6">
-          <button class="btn btn-primary pull-right" type="submit">Vote &raquo;</button>
+        <div class="vote-button col-xs-6">
+          <button class="btn btn-primary btn-lg" type="submit">Vote &raquo;</button>
         </div>
       </form>
     </div>
 
     <!-- Layout for polls allowing users to vote on multiple choices -->
-    <div ng-show="poll.multiple">
+    <div class="vote-box" ng-show="poll.multiple">
       <p class="lead">Please select all that apply.</p>
       <form role="form" ng-submit="vote()">
         <div ng-repeat="choice in poll.choices" class="radio">
           <label>
             <input type="checkbox" name="choice" ng-click="addRemoveVote(choice._id)" value="{{choice._id}}" />
-              {{choice.text}}
+              &nbsp;&nbsp;{{choice.text}}
           </label>
         </div>
+        <br>
         <p><hr></p>
-        <div class="col-xs-6">
-          <button class="btn btn-primary pull-right" type="submit">Vote &raquo;</button>
+        <div class="vote-button col-xs-6">
+          <button class="btn btn-primary btn-lg" type="submit">Vote &raquo;</button>
         </div>
       </form>
     </div>
   </div>
-  <div ng-show="userVoted">
+  <div class="result-button container-vote" ng-show="userVoted">
     <label> Your vote has been recorded! </label><br>
     <p>To view the results of this poll, click the result button below.</p>
-    <div class="col-xs-6">
-      <button class="btn btn-primary pull-right" type="button" ng-click="results()">Results &raquo;</button>
+    <div class="vote-button col-xs-6">
+      <a href="{{resultLink}}"><button class="result btn btn-primary btn-lg" type="button">Results &raquo;</button></a>
     </div>
   </div>
 </div>
