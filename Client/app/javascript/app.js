@@ -1,4 +1,6 @@
+/* jshint ignore:start */
 'use strict';
+/* jshint ignore:end */
 
 var PollFly = angular.module('PollFly', [
   'ngRoute',

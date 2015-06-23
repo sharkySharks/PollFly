@@ -27,7 +27,7 @@ function vote (req, res){
     voteData.votes.map(function(vote){
       var choice = poll.choices.id(vote);
       choice.votes.push({ip: voteData.IP});
-    })
+    });
     poll.save().then(function(poll){
       res.send(poll);
     });
