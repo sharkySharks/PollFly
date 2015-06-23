@@ -6,8 +6,9 @@
   <div class="chartBorder">
     <div class="chart" ng-repeat="bar in poll.choices">
       <label>{{bar.text}}</label>
-      <div style="width: {{bar.votes.length*25/width*100}}%;">
-        {{bar.votes.length}}
+      <p ng-if="!bar.votes.length"></p>
+      <div ng-if="bar.votes.length" style="width: {{bar.votes.length*25/width*100}}%;">
+        <span >{{bar.votes.length}}</span>
       </div><br>
     </div>
   </div>

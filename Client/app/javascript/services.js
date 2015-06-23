@@ -6,7 +6,7 @@ angular.module('PollFly.services', ['ngResource'])
   var createNew = function(pollData){
     return $http({
       method: 'POST',
-      url: 'polls/newPoll',
+      url: 'polls/',
       data: pollData
     })
     .then(function(res){
@@ -17,7 +17,7 @@ angular.module('PollFly.services', ['ngResource'])
   var pollVote = function(voteData){
     return $http({
       method: 'POST',
-      url: 'polls/vote',
+      url: 'polls/votes',
       data: voteData
     }).then(function(res){
       return res.data;

@@ -19,11 +19,13 @@ angular.module('PollFly.createPolls', ['ngRoute'])
   $scope.pathAlert = [];
 
   $scope.createNewPoll = function(){
-    $scope.poll.choices = $scope.poll.choices.filter(function(y){
-      return y.text.length>0;
-    });
     var poll = $scope.poll;
+
     if(poll.question.length > 0){
+      poll.choices = poll.choices.filter(function(y){
+        return y.text.length > 0;
+      });
+
       var count = 0;
 
       for(var i = 0, len = poll.choices.length; i < len; i++){
