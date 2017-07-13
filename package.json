@@ -27,5 +27,8 @@
     "karma-sauce-launcher": "*",
     "karma-script-launcher": "*",
     "karma-story-reporter": "*"
+  },
+  "engines": {
+    "node": "4.8.4"
   }
 }
