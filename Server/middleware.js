@@ -1,4 +1,4 @@
-var bodyParser = require('body-parser');
+var bodyParser = require('../node_modules/body-parser');
 
 module.exports = function(app, express){
   var polls = express.Router();

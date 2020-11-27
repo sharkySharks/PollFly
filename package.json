@@ -1,16 +1,16 @@
 {
-  "name": "PollFly",
-  "version": "0.1.0",
+  "name": "pollfly",
+  "version": "1.0.0",
   "description": "Create Polls on the Fly!",
   "repository": "https://github.com/sharkySharks/PollFly.git",
   "dependencies": {
-    "angular": "^1.4.1",
-    "angular-route": "^1.4.1",
-    "body-parser": "^1.13.1",
-    "express": "^4.12.4",
-    "jquery": "^2.1.4",
-    "mongodb": "^2.0.33",
-    "mongoose": "^4.0.5"
+    "angular": "1.8.2",
+    "angular-route": "1.8.2",
+    "body-parser": "1.19.0",
+    "express": "4.17.1",
+    "jquery": "3.5.1",
+    "mongodb": "3.6.3",
+    "mongoose": "5.10.16"
   },
   "devDependencies": {
     "grunt": "*",
@@ -26,9 +26,14 @@
     "karma-phantomjs-launcher": "*",
     "karma-sauce-launcher": "*",
     "karma-script-launcher": "*",
-    "karma-story-reporter": "*"
+    "karma-story-reporter": "*",
+    "nodemon": "2.0.6"
+  },
+  "scripts": {
+    "start": "node server/server.js",
+    "watch": "nodemon server/server.js --watch server --watch client"
   },
   "engines": {
-    "node": "4.8.4"
+    "node": "14.9.0"
   }
 }
