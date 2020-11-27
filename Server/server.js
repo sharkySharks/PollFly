@@ -12,7 +12,7 @@ app.use(express.static(__dirname + '/../client'));
 app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
-  res.sendFile('index.html', {root: __dirname + '/../client/app'});
+  res.sendFile('index.html', {root: __dirname + '/../client'});
 });
 
 require('./middleware')(app, express);
