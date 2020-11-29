@@ -4,15 +4,6 @@ https://pollfly.herokuapp.com
 
 ![website](website.png)
 
-## Future Features
-
-"...a work is never truly completed [...] but abandoned..." Paul Valéry
-
-Nice-to-have features:
-- shortened poll url link for easier sharing
-- use a data visualization library, like d3, to render cooler poll result graphs
-- add testing
-
 ## Running Application
 
 ### Initial setup
@@ -66,3 +57,12 @@ After running the above commands you should see the application successfully run
 ## Deployed Application
 
 This application is deployed using Heroku and MongoDB Atlas.
+
+## Future Features
+
+"...a work is never truly completed [...] but abandoned..." Paul Valéry
+
+Nice-to-have features:
+- shortened poll url link for easier sharing
+- use a data visualization library, like d3, to render cooler poll result graphs
+- add testing
